@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <script type="text/javascript">
+            function openProfile() {
+                var url = document.getElementById('profile');
+                open(url.options[url.selectedIndex].value, '_self');
+            }
+            
+        </script>
+    </head>
+    
+    
+<body background="images/bg_green_gradient.jpg">
+    <center><img src="images/amrita.png"></center>
+    <center><h1><u>Welcome to Amrita Hostel Systems</u></h1></center>
+
+    
+    <center>
+
+        <form name="selectProfile" action="openProfile()">
+        Select Profile:
+        <select id="profile">
+            <option value="Karthik.htm">Karthik Senorj</option>
+            <option value="Subramonian.htm" selected="selected">Subramonian Inian</option>
+            <option value="Jackson.htm">Jackson Isaac</option>
+        </select>
+        <button onclick="openProfile()">Open</button>
+        </form>
+
+
+        <input type="submit" value="Create New Profile" onclick="location.href = 'newProfile.htm';">
+
+    </center>
+</body>
+</html>

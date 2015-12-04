@@ -1,0 +1,64 @@
+<html>
+
+    <head>
+        <style>
+            input, textarea {
+                margin-left: 5em;
+            }
+            input[type=submit], input[type=reset] {
+                margin-left: 0em;
+            }
+        </style>
+    </head>
+    
+<body background="images/brown.jpg">
+<a href="index.html" style="text-align: right" target="_top">Logout</a>
+
+<center>
+    <font size='20'><u>New Entry</u></font>
+</center>
+
+<img src="images/profile.jpg">
+
+<form method="post" action="uploadServlet">
+    <input type="file" name="photo"/>
+
+<br>
+<br>
+  Roll No:
+  <input type="text" name="roll">
+<br>
+  First name:
+  <input type="text" name="fname">
+<br>  
+  Last name:
+  <input type="text" name="lname">
+<br>
+  Guardian Name:
+  <input type="text" name="guardian">
+<br>
+  Address: <br>
+  <textarea rows="4" cols="22" name="address"></textarea>
+<br>
+  Hostel Name:
+  <input type="text" name="hostel">
+<br>
+  Room Number:
+  <input type="text" name="room">
+<br>
+  Email Id:
+  <input type="text" name="email">
+<br>
+  Phone Number:
+  <input type="text" name="contact">
+<br>
+  Remarks: <br>
+  <textarea rows="4" cols="22" name="remarks"></textarea>
+<br>
+
+<input type="reset" value="Reset"/>
+<input type="submit" value="Create"/>
+
+</form>
+</body>
+</html>

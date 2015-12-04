@@ -1,0 +1,30 @@
+<html>
+<head>
+    <title>Hostel Management System</title>
+    <link rel="stylesheet" href="css/login.css"/>
+</head>
+
+<body>
+    <center>
+        <img src="images/amrita.jpg">
+    </center>
+    <center>
+    <div class="login">
+        <h2>Hostel Management System</h2>
+        <form method="post" action="loginServlet">
+            <input type="text" name="username" value="Username" autofocus 
+                    onblur="if(value==='') value='Username'"
+                    onfocus="if(value==='Username') value=''">
+            <input type="password" name="password" value="Password"
+                   onblur="if(value==='') value='Password'"
+                    onfocus="if(value==='Password') value=''">
+            <center>
+                <input id="login" type="submit" value="Login" style="height: 2.5em;">
+            </center>
+            
+            <input type="submit" id="reg" value="Register" onclick="form.action='registerServlet';">
+        </form>
+    </div>
+    </center>
+</body>
+</html>
