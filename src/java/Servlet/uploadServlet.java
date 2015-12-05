@@ -104,6 +104,16 @@ public class uploadServlet extends HttpServlet
 			
 			try {
 				int rs = ps.executeUpdate();
+				
+				sql = "insert into attendance values(?, 0, 0);";
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, roll);
+				
+				try {
+					rs = ps.executeUpdate();
+				} catch (SQLException sqe) {
+					
+				}
 				response.sendRedirect("http://localhost:8080/Hostel_Management_System/details.htm");
 			} catch (SQLException sqe) {
 				System.out.println("Error " + sqe);

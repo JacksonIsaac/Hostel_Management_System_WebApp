@@ -120,16 +120,34 @@ public class studentServlet extends HttpServlet
 					out.print("Room:</td><td>" + room + "</td></tr><tr><td>");
 					out.print("Email:</td><td>" + email + "</td></tr><tr><td>");
 					out.print("Contact:</td><td>" + cont + "</td></tr><tr><td>");
-					out.print("Remarks:</td><td>" + rem + "</td></tr></table>");
+					out.print("Remarks:</td><td>" + rem + "</td></tr>");
 					
 					HttpSession session=request.getSession();  
 					session.setAttribute("roll", roll);  
 					
-					out.print("<form id=\"attendanceForm\" action=\"attnServlet\">"+ ""
+					sql = "SELECT att_pres, att_total, updated\n" +
+							"  FROM attendance where roll_no=?;";
+					
+					ps = conn.prepareStatement(sql);
+					ps.setString(1, roll);
+
+					rs = ps.executeQuery();
+
+					if(rs.next()) {
+						String pres = rs.getString("att_pres");
+						String tot = rs.getString("att_total");
+						String up = rs.getString("updated");
+						out.print("<tr><td>Attendance:</td><td>" + pres + "/" + tot + "</td></tr>");
+						out.print("<tr><td>Updated On:</td><td>" + up + "</td></tr>");
+					}
+					
+					out.print("</table>");
+					
+					out.print("<form id=\"attendanceForm\" action=\"attnServlet\">"
 						+ "Add Attendence:<br> Date:\n" +
 						"<input type=\"date\" name=\"date\">\n" +
-						"<input type=\"radio\" name= \"attendance\" value=\"Present\" checked/>Present\n" +
-						" <input type=\"radio\" name=\"attendance\" value=\"Absent\"/>Absent" +
+						"<input type=\"radio\" name= \"attn\" value=\"Present\" checked/>Present\n" +
+						"<input type=\"radio\" name=\"attn\" value=\"Absent\" />Absent" +
 						"<input type=\"submit\">\n" + 
 						"</form>");
 					

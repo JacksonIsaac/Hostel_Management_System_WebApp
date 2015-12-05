@@ -12,7 +12,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -53,7 +56,7 @@ public class attnServlet extends HttpServlet
 			
 			Connection conn = null;
 			PreparedStatement ps = null;        
-			String sql;
+			String sql = "";
 			try {
 				Class.forName(JDBC_DRIVER);            
 
@@ -61,15 +64,41 @@ public class attnServlet extends HttpServlet
 
 				conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
 
-				sql = "SELECT roll_no, fname, lname, gaurdian, address, hostel, room, email, \n" +
-"       contact, remarks\n" +
-"  FROM student where roll_no=?;";
-
+				String option = request.getParameter("attn");
+				
+				if("Present".equals(option)) {
+					sql = "Select att_present(?, ?);";
+				} else if("Absent".equals(option)) {
+					sql = "Select att_absent(?, ?);";
+				}
+				
 				ps = conn.prepareStatement(sql);
 
 				HttpSession session=request.getSession();  
 				String rollNo = (String)session.getAttribute("roll");
-				out.print(rollNo);
+				
+				String datestr = request.getParameter("date");
+				
+				ps.setString(1, rollNo);
+				ps.setDate(2, java.sql.Date.valueOf(datestr));
+				
+				ResultSet rs = ps.executeQuery();
+
+            if(rs.next()) {
+				System.out.println("Success");
+
+                out.println("<script type=\"text/javascript\">");  
+				out.println("alert('Attendance updated for " + rollNo + ".');");
+				out.println("location='selection.jsp';");
+				out.println("</script>"); 
+            } else {
+				System.out.println("Error");
+
+				out.println("<script type=\"text/javascript\">");  
+				out.println("alert('Error');");
+				out.println("location='selection.jsp';");
+				out.println("</script>"); 
+			}
 				
 			} catch(SQLException e) {
 					e.printStackTrace();
