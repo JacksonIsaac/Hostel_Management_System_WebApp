@@ -13,24 +13,25 @@
     <center><img src="images/amrita.png"></center>
 
 <%
-   Cookie cookie = null;
-   Cookie[] cookies = null;
-   // Get an array of Cookies associated with this domain
-   cookies = request.getCookies();
-   if( cookies != null ){
-    out.println("Logged in as: ");
-    out.print(cookies[cookies.length - 1].getValue());
-/*
-      for (int i = 0; i < cookies.length; i++){
-         cookie = cookies[i];
-         out.print("Name : " + cookie.getName( ) + ",  ");
-         out.print("Value: " + cookie.getValue( )+" <br/>");
-      }*/
-  } else{
-      out.println("<h2>No cookies founds</h2>");
-  }
+    Cookie cookie = null;
+    Cookie[] cookies = null;
+    // Get an array of Cookies associated with this domain
+    cookies = request.getCookies(); 
+    
+//    out.print(cookies[cookies.length - 1].getValue());
+    if(cookies != null) {
+        for (int i = 0; i < cookies.length; i++){
+            cookie = cookies[i];
+            if( cookie.getName().equals("username") ) {
+                out.print("Logged in as: " + cookie.getValue());
+            }
+        }
+    } else {
+        out.print("No Cookies Found.");
+    }
+    
 %>
-    <a href="index.html" style="text-align: right; margin-right: 0em" target="_top">Logout</a>
+    <a href="logout.jsp" style="text-align: right; margin-right: 0em" target="_top">Logout</a>
     <center><h1><u>Welcome to Amrita Hostel Systems</u></h1></center>
 
     

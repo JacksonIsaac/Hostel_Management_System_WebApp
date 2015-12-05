@@ -16,6 +16,10 @@
         <servlet-name>studentServlet</servlet-name>
         <servlet-class>Servlet.studentServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>attnServlet</servlet-name>
+        <servlet-class>Servlet.attnServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>loginServlet</servlet-name>
         <url-pattern>/loginServlet</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>studentServlet</servlet-name>
         <url-pattern>/studentServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>attnServlet</servlet-name>
+        <url-pattern>/attnServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
